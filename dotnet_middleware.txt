@@ -1,0 +1,6 @@
+# Security Middleware=>
+
+HTTPS Redirection Middleware (UseHttpsRedirection)
+HSTS Middleware (UseHsts)
+CORS Middleware (UseCors)
+

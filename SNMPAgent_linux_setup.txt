@@ -1,0 +1,42 @@
+sudo# Install the SNMP agent on ubuntu 
+# >> means bash commands 
+# Editfile::
+1>Install the SNMP agent (snmpd) (open terminal and run the below commands )
+	>> sudo apt update
+	>> sudo apt install snmpd snmp
+	
+snmpd → the SNMP agent (server)
+nmp → client tools (for testing)
+
+2>Configure the SNMP agent
+Edit the main configuration file:
+	Path : sudo nano /etc/snmp/snmpd.conf 
+	
+	a> Basic secure configuration (recommended)
+	Comment out the default insecure line:
+	Editfile:: #rocommunity public
+	b> Add a read-only community (example: mycommunity):
+	Editfile:: rocommunity mycommunity localhost
+	c> If you want remote access (replace 192.168.1.0/24 with your network):
+	Editfile:: rocommunity mycommunity 192.168.1.0/24
+	d> Set the agent address (listen on all interfaces):
+	Editfile:: agentAddress udp:161
+	e> Save and exit (CTRL+O, Enter, CTRL+X).
+	
+3>Restart and enable SNMP service
+	>> sudo systemctl restart snmpd
+	>> sudo systemctl enable snmpd
+	
+Check status:
+	>> systemctl status snmpd
+
+4>Allow SNMP through the firewall (if UFW is enabled)
+	>> sudo ufw allow 161/udp
+	>> sudo ufw reload
+	
+5>Test the SNMP agent locally
+	>> snmpwalk -v2c -c mycommunity localhost system
+
+6>(Optional) Test from another machine
+	>> snmpwalk -v2c -c mycommunity <ubuntu-ip> system
+

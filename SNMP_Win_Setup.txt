@@ -1,0 +1,46 @@
+// basically it is a Agent Setup
+// SNMP Setup for windows 
+1. Install the SNMP Feature (GUI Method)
+	Open Settings > Apps > Optional features.
+	Click View features next to "Add an optional feature".
+	Search for "SNMP", check both Simple Network Management Protocol (SNMP) and WMI SNMP Provider, then click Next and Install. 
+	
+2. Configure the SNMP Service
+	Press Win + R, type services.msc, and press Enter.
+	Find and double-click SNMP Service.
+	On the General tab, set Startup type to Automatic and click Start.
+	i>Go to the Security tab.
+		a> Under "Community Names," click Add, enter a community string (e.g., public), and set permissions (e.g., READ ONLY).
+		b> Under "Accept SNMP packets from these hosts," click Add and enter the IP address of your Network Management System (NMS). 
+		
+3. Configure Windows Firewall
+	Search for "Windows Defender Firewall with Advanced Security" and open it.
+	Create a new Inbound Rule for Port (UDP).
+	Specify ports 161, 162 and allow the connection for your NMS's IP address.
+	
+4.Using PowerShell (Alternative) ( run powershell as Adminstartor)
+	Install: Add-WindowsCapability -Online -Name "SNMP.Client~~~~0.0.1.0".
+	Verify: Get-WindowsCapability -Online | Where-Object Name -like "*SNMP*".
+	Configure: Use services.msc as described above for security settings. 		
+
+
+// Next step is get program ( for example GetRequest SNMP Listerner) 
+URL To get code => https://github.com/lextudio/sharpsnmplib-samples/blob/master/Samples/CSharpCore/snmpget/Program.cs
+
+1> Launch Visual Studio
+2> Click Create a new project
+3>Select Console App
+4>Click Next
+5>Configure Project like Name,Location, SubName 
+6>Right-click project name
+7>Click Manage NuGet Packages
+8>Install these packages:
+	a>Lextm.SharpSnmpLib
+	b>Mono.Options
+	
+// set command line arguments 
+9> Right click on project file and then select properties >> in properties select Debug >> In General Open Debug launch profile UI >>
+	In that Paste the command line argument "-c=public -v=1 localhost 1.3.6.1.2.1.1.1.0" 
+	
+10> Build and Run the application 
+ 

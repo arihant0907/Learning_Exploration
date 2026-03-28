@@ -1,0 +1,72 @@
+# Learning about CNN
+CNN(Convolutional Neural Network) is type of deep leaning neural network mainly used for image and spatial 
+data processing. What Convolutional means where small filters (kernels) slide over input data (like an image)
+to detect local patterns such as edges, textures, or shapes. This helps model to learn features faster.
+It automatically learns:
+	Edges-> texture-> shapes-> objects 
+	
+CNN is used when data has spatial structure such as :
+	a> Images 
+	b> video frames 
+	c> Medical scans 
+	d> Spectrogram 
+	
+Basic architecture of CNN:
+
+{ Input Layer => Convolution Layer => Activation Layer => Pooling Layer => Repeadted blocks
+
+=> Fully connected (Dense) Layer => Output Layer }
+
+1> Input Layer :
+	Takes the input(Images , videos , scans , etc)
+	
+2> Convolution Layer:
+	Applies filter ( kernels) to extract features and produces feature maps.
+	It learns edges , corners , texture and so on from input data 
+	
+3> Activation Layer (ReLU):
+	Most common activation function where are used like ReLU.
+	
+4> Polling Layer:
+	Reduces spatial size , Common type : Max Pooling 
+	benefits : reduces computation , controls overfitting , makes model translation-invariant
+	
+5> Repeadted blocks:
+	[ Convolution -> ReLU -> Pooling ]
+	
+6>Fully Connected Layer :
+	Converts features maps into a vector and performs final decision making 
+	
+7>Output layer:
+	Gives final prediction 
+	Example : softmax , sigmoid 
+	
+# Types of CNN and where it used 
+1> Image Classification:
+	Used when : Disease classification, Digit recognition
+	Common CNNs: LeNet, AlexNet, VGG, ResNet, DenseNet, EfficientNet, MobileNet
+	
+2> Object Detection CNNs:
+	Used when: Face detection, Car detection, Pedestrian detection
+	CNNS: R-CNN / Fast R-CNN / Faster R-CNN, YOLO (v1–v8), SSD, RetinaNet, MTCNN 
+	(face detection only)
+	
+3> Face-Specific CNNs: 
+	Used when:Face detection, Face alignment, Landmark detection, Face recognition (preprocessing)
+	CNNS: MTCNN, RetinaFace,  FaceNet (recognition), ArcFace
+	
+4> Image Segmentation CNNs:
+	Used when:Medical image segmentation, Road/lane detection, Background removal
+	CNNs: U-Net, FCN, DeepLab, Mask R-CNN
+	
+5> Feature Extraction / Embedding CNNs:
+	Used when:Face recognition, Image similarity, Retrieval systems
+	CNNs: ResNet (as backbone), FaceNet, ArcFace, VGGFace
+	
+6> Lightweight / Real-Time CNNs:
+	Used when:Mobile apps, Embedded systems, Edge devices
+	CNNs: MobileNet, ShuffleNet, SqueezeNet, EfficientNet-Lite
+	
+7> Generative CNNs:
+	Used when:Face generation, Image enhancement, Super-resolution
+	CNNs: GANs (DCGAN, StyleGAN), Autoencoders, Super-Resolution CNNs (SRCNN)

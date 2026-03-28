@@ -1,0 +1,40 @@
+#Move existing Ubuntu WSL from C → D drive
+
+1>Open PowerShell as Administrator
+
+2>Check your distro name
+	>> wsl --list --verbose
+	
+3>You will see something like:
+	Ubuntu    Running    2
+
+4>Shutdown WSL
+	>> wsl --shutdown
+
+5>Create a folder on D drive
+	>> mkdir D:\WSL
+
+6>Export Ubuntu to D drive
+	>> wsl --export Ubuntu D:\WSL\ubuntu.tar
+
+7>Unregister Ubuntu (removes it from C drive) // This step deletes Ubuntu from C drive, but your data is safe in the .tar
+	>> wsl --unregister Ubuntu
+	
+8>Import Ubuntu to D drive
+	>> wsl --import Ubuntu D:\WSL\Ubuntu D:\WSL\ubuntu.tar
+
+9>Now Ubuntu is stored in:
+	D:\WSL\Ubuntu
+
+10>(Optional) Set Ubuntu as default
+	>> wsl --set-default Ubuntu
+
+11>Start Ubuntu
+	>> wsl
+
+12> Important fix (user login) // After import, Ubuntu may log you in as root.
+	>> ubuntu config --default-user your_username
+
+13>Verify location
+	D:\WSL\Ubuntu
+

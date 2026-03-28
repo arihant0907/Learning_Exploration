@@ -1,0 +1,127 @@
+# SNMP (Simple Network Management Protocol)
+
+SNMP (Simple Network Management Protocol) is a manager–agent protocol used to:
+Monitor, query, and control networked devices (routers, switches, servers, UPS, printers, IoT, apps).
+a> It is NOT for normal data traffic.
+b> It is only for management information
+
+There are 3 main parts/roles of SNMP: 
+a> SNMP Manager (Controller)=>
+	Central system of SNMP protocol , The manager is your C# SNMP Application or Network Monitoring Tool 
+	(SolarWinds, Zabbix, Nagios). These Tools/ Appliation that Request for Information, Mannges some set  
+	Operation and receives traps.
+	
+b> SNMP Agent=>
+	This Tool or Program that runs on each device such Router, Switch, Linux server (snmpd), Printer
+	and Embedded controller. It collects the data from device and Answers requests
+	
+c> MIB (Management Information Base)=>
+	A dictionary that defines what data exists and where it is located, It uses OID.
+	
+	
+OID(Object Identifier)=>
+	The OID is an number, each number has meaning like the number "1.3.6.1.2.1.1.1.0" meaning system
+	description, While making a request a input OID is passed to that request to get particular 
+	information. Below some example OIDs and their meaning.
+	
+1.3.6.1.2.1.1.1.0 => System Description
+1.3.6.1.2.1.1.3.0 => System Uptime
+1.3.6.1.2.1.25.3.3.1.2 => CPU Load
+1.3.6.1.2.1.2.2.1.10 => Interface In Octets
+
+These mappings are defined in MIB files.
+
+Picture (one diagram) =>
+          ┌────────────────┐
+          │  SNMP Manager  │
+          │ (Your C# App)  │
+          └───────┬────────┘
+                  │ GET / SET
+            UDP 161│
+                  ▼
+          ┌────────────────┐
+          │   SNMP Agent   │
+          │ (snmpd/device)│
+          └───────┬────────┘
+                  │ TRAP
+            UDP 162│
+                  ▼
+          ┌────────────────┐
+          │   Manager      │
+          └────────────────┘
+
+
+Features of SNMP=>
+a>Lightweight
+b>Works on almost every device
+c>Vendor-independent
+d>Simple polling model
+e>UDP unreliable
+f>Complex OIDs
+g>Hard to debug without tools
+
+Simple Defination Of SNMP:
+SNMP is a UDP-based protocol where a Manager asks Agents for values (OIDs) defined in MIBs, 
+and Agents respond or send events (traps).SNMP uses UDP (User Datagram Protocol) as its transport
+layer, not TCP. Even though it uses UDP, it is still part of the TCP/IP suite. Because the TCP/IP
+model includes UDP.
+
+Which UDP ports does SNMP use?
+SNMP requests (GET/SET/RESPONSE) =>	161
+SNMP traps / informs =>	162
+
+SNMP Packet Stack=> 
+┌───────────────────────────────┐
+│ Ethernet Header               │  ← MAC addresses
+├───────────────────────────────┤
+│ IP Header                     │  ← Source IP, Dest IP
+├───────────────────────────────┤
+│ UDP Header                    │  ← Ports 161 / 162
+├───────────────────────────────┤
+│ SNMP Message (ASN.1 / BER)    │  ← PDU, OIDs, values
+└───────────────────────────────┘
+
+SNMP Over UDP =>
+1>Send request
+2>Wait for response
+3>Timeout → retry
+
+SNMP Message Types:=>
+
+| SNMP Operation | PDU Class           | Response Returned | Notes                      |
+| -------------- | ------------------- | ----------------- | -------------------------- |
+| **GET**        | `GetRequestPdu`     | `ResponsePdu`     | Retrieves value of OIDs    |
+| **GET-NEXT**   | `GetNextRequestPdu` | `ResponsePdu`     | Retrieves next OID         |
+| **GET-BULK**   | `GetBulkRequestPdu` | `ResponsePdu`     | Bulk table retrieval (v2+) |
+| **SET**        | `SetRequestPdu`     | `ResponsePdu`     | Sets value on agent        |
+| **RESPONSE**   | `ResponsePdu`       | ❌ No response     | Sent by agent              |
+| **TRAP v1**    | `TrapV1Pdu`         | ❌ No response     | Unacknowledged             |
+| **TRAP v2**    | `TrapV2Pdu`         | ❌ No response     | Unacknowledged             |
+| **INFORM**     | `InformRequestPdu`  | `ResponsePdu`     | Requires acknowledgment    |
+| **REPORT**     | `ReportPdu`         | ❌ No response     | SNMPv3 only                |
+
+Message Types by SNMP Version
+🔹 SNMP v1
+	GetRequestPdu
+	GetNextRequestPdu
+	SetRequestPdu
+	ResponsePdu
+	TrapV1Pdu
+
+🔹 SNMP v2c
+	All v1 PDUs +
+	GetBulkRequestPdu
+	TrapV2Pdu
+	InformRequestPdu
+	ReportPdu
+
+🔹 SNMP v3
+	Same PDUs as v2c
+	Wrapped inside secure messages
+	Uses ReportPdu for errors like auth failure
+	
+ResponsePdu Contain:
+responsePdu.ErrorStatus
+responsePdu.ErrorIndex
+responsePdu.Variables
+
