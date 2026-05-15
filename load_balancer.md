@@ -4,10 +4,10 @@
 
 > What it does:
 
-1.Distributes web traffic (HTTP/HTTPS)
-2.Balances TCP traffic (databases, APIs, etc.)
-3.Performs health checks
-4.Improves scalability and reliability
+1.Distributes web traffic (HTTP/HTTPS).
+2.Balances TCP traffic (databases, APIs, etc.).
+3.Performs health checks.
+4.Improves scalability and reliability.
 
 ### Simple idea:
 ```
