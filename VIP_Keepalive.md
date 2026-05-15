@@ -10,25 +10,24 @@ The below setup is known as MySQL dual-master replication setup or master - mast
 4. Detects failures and switches active node
 
 ### Types of Master-Master Replication:
-> 1. Active-Active
-** Both servers accept writes.** 
+1. Active-Active
+**Both servers accept writes.** 
 ```
 App → DB1
 App → DB2
 ```
-Problem
-* Can cause:
-1.Split brain
-2.Conflicts
-3.Duplicate keys
-4.Data inconsistency
+Problem can cause:
+1. Split brain
+2. Conflicts
+3. Duplicate keys
+4. Data inconsistency
 
 > [!NOTE]
 > Especially risky with only 2 nodes.
 
-> 2. Active-Passive (Your Setup)
+2. Active-Passive (Your Setup)
 
-** Only one server accepts writes.**
+**Only one server accepts writes.**
 ```
 App → DB1 (Active)
 DB2 = Standby
@@ -36,14 +35,14 @@ DB2 = Standby
 > [!NOTE]
 > B2 becomes active only during failover.
 
-*Benefits
-1.Safer
-2.Easier to manage
-3.Better consistency
-4.Lower risk of conflicts
+Benefits:
+1. Safer
+2. Easier to manage
+3. Better consistency
+4. Lower risk of conflicts
 
 ### Simple idea:
->> Server1 (MASTER) ← VIP → Server2 (BACKUP)
+> Server1 (MASTER) ← VIP → Server2 (BACKUP)
 
 If Server1 fails → VIP moves to Server2 automatically.
 
