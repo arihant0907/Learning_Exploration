@@ -1,13 +1,13 @@
 # What is Keepalived?
 
-** Keepalived is a high availability (HA) tool used to assign a Virtual IP (VIP) and provide failover between servers.**
+**Keepalived is a high availability (HA) tool used to assign a Virtual IP (VIP) and provide failover between servers.**
 The below setup is known as MySQL dual-master replication setup or master - master replication setup 
 
 ### What it does:
-1.Creates a floating Virtual IP
-2.Ensures failover between servers
-3.Uses VRRP (Virtual Router Redundancy Protocol)
-4.Detects failures and switches active node
+1. Creates a floating Virtual IP
+2. Ensures failover between servers
+3. Uses VRRP (Virtual Router Redundancy Protocol)
+4. Detects failures and switches active node
 
 ### Types of Master-Master Replication:
 > 1. Active-Active
