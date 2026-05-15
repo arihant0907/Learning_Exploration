@@ -1,6 +1,6 @@
 # What is HAProxy?
 
-** HAProxy is a high-performance load balancer and reverse proxy that distributes incoming traffic across multiple backend servers. ** 
+**HAProxy is a high-performance load balancer and reverse proxy that distributes incoming traffic across multiple backend servers.** 
 
 *What it does:
 1.Distributes web traffic (HTTP/HTTPS)
