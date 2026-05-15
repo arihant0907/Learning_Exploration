@@ -11,6 +11,7 @@ The below setup is known as MySQL dual-master replication setup or master - mast
 
 ### Types of Master-Master Replication:
 1. Active-Active
+
 **Both servers accept writes.** 
 ```
 App → DB1
