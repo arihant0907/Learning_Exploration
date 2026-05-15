@@ -2,7 +2,7 @@
 
 **HAProxy is a high-performance load balancer and reverse proxy that distributes incoming traffic across multiple backend servers.** 
 
-*What it does:
+> What it does:
 1.Distributes web traffic (HTTP/HTTPS)
 2.Balances TCP traffic (databases, APIs, etc.)
 3.Performs health checks
